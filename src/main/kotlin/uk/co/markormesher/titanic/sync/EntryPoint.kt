@@ -15,6 +15,7 @@ fun main(vararg argsInput: String) {
 			.addCommand("set-identity", setIdentityArgs)
 			.addCommand("sync", syncArgs)
 			.build()
+	argParser.programName = "titanic"
 
 	try {
 		argParser.parse(*argsInput)
@@ -43,6 +44,9 @@ fun main(vararg argsInput: String) {
 		}
 		"sync" -> {
 
+		}
+		else -> {
+			argParser.usage()
 		}
 	}
 
