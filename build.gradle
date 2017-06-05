@@ -1,5 +1,5 @@
 buildscript {
-	ext.kotlin_version = '1.1.2-2'
+	ext.kotlin_version = "1.1.2-2"
 
 	repositories {
 		mavenCentral()
@@ -10,20 +10,20 @@ buildscript {
 	}
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'application'
+apply plugin: "kotlin"
+apply plugin: "application"
 
-group 'titanic-sync'
-version '1.0.0'
-mainClassName = 'uk.co.markormesher.titanic.sync.EntryPointKt'
+group "titanic-sync"
+version "1.0.0"
+mainClassName = "uk.co.markormesher.titanic.sync.EntryPointKt"
 
 /* compiling */
 
 task fatJar(type: Jar) {
 	manifest {
-		attributes 'Implementation-Title': 'Titanic Sync',
-				'Implementation-Version': version,
-				'Main-Class': mainClassName
+		attributes "Implementation-Title": "Titanic Sync",
+				"Implementation-Version": version,
+				"Main-Class": mainClassName
 	}
 	baseName = project.name
 	from {configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}}
@@ -38,4 +38,5 @@ repositories {
 
 dependencies {
 	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+	compile "com.beust:jcommander:1.72"
 }
