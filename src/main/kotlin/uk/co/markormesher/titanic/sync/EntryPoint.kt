@@ -6,13 +6,13 @@ import com.beust.jcommander.ParameterException
 
 fun main(vararg argsInput: String) {
 	val globalArgs = GlobalArgs()
-	val setApiKeyArgs = SetApiKeyArgs()
-	val setIdentityArgs = SetIdentityArgs()
+	val initArgs = InitArgs()
+	val setConfigArgs = SetConfigArgs()
 	val syncArgs = SyncArgs()
 	val argParser = JCommander.newBuilder()
 			.addObject(globalArgs)
-			.addCommand("set-api-key", setApiKeyArgs)
-			.addCommand("set-identity", setIdentityArgs)
+			.addCommand("init", initArgs)
+			.addCommand("set", setConfigArgs)
 			.addCommand("sync", syncArgs)
 			.build()
 	argParser.programName = "titanic"
@@ -20,11 +20,11 @@ fun main(vararg argsInput: String) {
 	try {
 		argParser.parse(*argsInput)
 	} catch (e: MissingCommandException) {
-		println("Command not recognised: ${e.unknownCommand}")
+		println("ERROR: Command not recognised: ${e.unknownCommand}")
 		println()
 		argParser.usage()
 	} catch(e: ParameterException) {
-		println(e.message)
+		println("ERROR: ${e.message}")
 		println()
 		argParser.usage()
 	}
@@ -34,12 +34,20 @@ fun main(vararg argsInput: String) {
 		return
 	}
 
+	val config: Config
+	try {
+		config = Config(globalArgs.titanicFolder)
+	} catch (e: IllegalArgumentException) {
+		println("ERROR: ${e.message}")
+		return
+	}
+
 	val command = argParser.parsedCommand
 	when (command) {
-		"set-api-key" -> {
+		"init" -> {
 
 		}
-		"set-identity" -> {
+		"set" -> {
 
 		}
 		"sync" -> {

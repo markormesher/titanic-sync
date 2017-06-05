@@ -15,21 +15,19 @@ open class GlobalArgs {
 
 }
 
-@Parameters(commandDescription = "Set and validate your API key")
-class SetApiKeyArgs {
+@Parameters(commandDescription = "Initialise this Titanic Sync installation")
+open class InitArgs {
 
-	@Parameter(required = false, description = "Your API key")
+	@Parameter(names = arrayOf("-key"), required = false, description = "Your API key")
 	var key = ""
 
-}
-
-@Parameters(commandDescription = "Set and validate this machine's identity")
-class SetIdentityArgs {
-
-	@Parameter(required = false, description = "This machine's name (must match name entered on Titanic website)")
+	@Parameter(names = arrayOf("-identity"), required = false, description = "This machine's name (must match name entered on Titanic website)")
 	var machineName = ""
 
 }
+
+@Parameters(commandDescription = "Set any configuration variable")
+class SetConfigArgs: InitArgs()
 
 @Parameters(commandDescription = "Sync Titanic content to this machine")
 class SyncArgs {
