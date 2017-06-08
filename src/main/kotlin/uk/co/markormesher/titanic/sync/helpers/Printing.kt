@@ -12,5 +12,8 @@ fun printInfo(message: String)
 fun printDone(message: String)
 		= println(" $BOLD[ Done]$RESET  $message")
 
+fun printWarning(message: String)
+		= println(" $BOLD[ Warn]$RESET  $message")
+
 fun printError(message: String)
 		= println(" $BOLD[Error]$RESET  $message")

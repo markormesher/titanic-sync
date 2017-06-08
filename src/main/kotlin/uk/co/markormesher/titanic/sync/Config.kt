@@ -30,6 +30,15 @@ class Config(val titanicFolder: File) {
 		}
 	}
 
+	fun requireIsNotInitialised(): Boolean {
+		if (!isInitialised) {
+			return true
+		} else {
+			printError("Titanic has already been initialised in ${titanicFolder.absolutePath}")
+			return false
+		}
+	}
+
 	fun initalise(): Boolean {
 		printTask("Initialising file structure...")
 

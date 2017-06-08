@@ -3,9 +3,11 @@ package uk.co.markormesher.titanic.sync.commands
 import uk.co.markormesher.titanic.sync.Config
 import uk.co.markormesher.titanic.sync.SetConfigArgs
 import uk.co.markormesher.titanic.sync.helpers.printDone
-import uk.co.markormesher.titanic.sync.helpers.printInfo
+import uk.co.markormesher.titanic.sync.helpers.printWarning
 
-fun setConfig(config: Config, setConfigArgs: SetConfigArgs) {
+fun runSetConfig(config: Config, setConfigArgs: SetConfigArgs) {
+	if (!config.requireIsInitialised()) return
+
 	var workDone = false
 
 	if (setConfigArgs.key.isNotBlank()) {
@@ -21,6 +23,6 @@ fun setConfig(config: Config, setConfigArgs: SetConfigArgs) {
 	if (workDone) {
 		printDone("Config arguments saved")
 	} else {
-		printInfo("No config arguments updated")
+		printWarning("No config arguments updated")
 	}
 }
