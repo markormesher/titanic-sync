@@ -10,6 +10,7 @@ class Config(val titanicFolder: File) {
 	private val commandPrefix = "titanic [ -d <config folder location> ]"
 
 	private val apiKeyFile = File(titanicFolder, "api-key")
+	private val apiUrlFile = File(titanicFolder, "api-url")
 	private val identityFile = File(titanicFolder, "identity")
 
 	/*
@@ -61,13 +62,13 @@ class Config(val titanicFolder: File) {
 	val apiKeyIsSet: Boolean
 		get() = apiKeyFile.exists() || apiKeyFile.isFile
 
-	fun requireKeyIsSet(): Boolean {
+	fun requireApiKeyIsSet(): Boolean {
 		if (apiKeyIsSet) {
 			return true
 		} else {
 			printError("No API key has been set")
 			printInfo("To set an API key, run:")
-			printInfo("    $commandPrefix set --api-key <your API apiKey>")
+			printInfo("    $commandPrefix set --api-key <your API key>")
 			return false
 		}
 	}
@@ -80,6 +81,37 @@ class Config(val titanicFolder: File) {
 		}
 		apiKeyFile.writeText(apiKey)
 		printInfo("API key set in ${apiKeyFile.absolutePath}")
+	}
+
+	/*
+	API URL
+	 */
+
+	val apiUrl: String
+		get() = apiUrlFile.readText()
+
+	val apiUrlIsSet: Boolean
+		get() = apiUrlFile.exists() || apiUrlFile.isFile
+
+	fun requireApiUrlIsSet(): Boolean {
+		if (apiUrlIsSet) {
+			return true
+		} else {
+			printError("No API URL has been set")
+			printInfo("To set an API URL, run:")
+			printInfo("    $commandPrefix set --api-url <API URL>")
+			return false
+		}
+	}
+
+	fun setApiUrl(apiUrl: String) {
+		printTask("Setting API URL...")
+
+		if (!apiUrlIsSet) {
+			apiUrlFile.createNewFile()
+		}
+		apiUrlFile.writeText(apiUrl)
+		printInfo("API URL set in ${apiUrlFile.absolutePath}")
 	}
 
 	/*

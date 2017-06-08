@@ -5,7 +5,7 @@ import okhttp3.Request
 import okhttp3.Response
 import uk.co.markormesher.titanic.sync.Config
 
-fun buildBaseUrl(config: Config) = HttpUrl.parse("http://localhost:3004")!!.newBuilder().addPathSegment("api")!!
+fun buildBaseUrl(config: Config) = HttpUrl.parse(config.apiUrl)!!.newBuilder().addPathSegment("api")!!
 
 fun buildBaseRequest(config: Config, url: HttpUrl) = Request.Builder().url(url).addHeader("Authorization", config.apiKey)!!
 

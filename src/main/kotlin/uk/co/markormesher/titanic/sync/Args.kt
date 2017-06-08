@@ -17,8 +17,11 @@ open class GlobalArgs {
 @Parameters(commandDescription = "Initialise this Titanic Sync installation")
 open class InitArgs {
 
-	@Parameter(names = arrayOf("--api-key"), required = false, description = "Your API apiKey")
-	var key = ""
+	@Parameter(names = arrayOf("--api-key"), required = false, description = "Your API key")
+	var apiKey = ""
+
+	@Parameter(names = arrayOf("--api-url"), required = false, description = "URL of the Titanic server")
+	var apiUrl = "http://titanic.markormesher.co.uk"
 
 	@Parameter(names = arrayOf("--identity"), required = false, description = "This machine's identity (must match name entered on Titanic website)")
 	var identity = ""

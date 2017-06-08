@@ -10,8 +10,13 @@ fun runSetConfig(config: Config, setConfigArgs: SetConfigArgs) {
 
 	var workDone = false
 
-	if (setConfigArgs.key.isNotBlank()) {
-		config.setApiKey(setConfigArgs.key)
+	if (setConfigArgs.apiKey.isNotBlank()) {
+		config.setApiKey(setConfigArgs.apiKey)
+		workDone = true
+	}
+
+	if (setConfigArgs.apiUrl.isNotBlank()) {
+		config.setApiUrl(setConfigArgs.apiUrl)
 		workDone = true
 	}
 

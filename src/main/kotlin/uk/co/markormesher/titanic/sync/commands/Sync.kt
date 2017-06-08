@@ -18,7 +18,8 @@ private val httpClient by lazy {
 
 fun runSync(config: Config, syncArgs: SyncArgs) {
 	if (!config.requireIsInitialised()) return
-	if (!config.requireKeyIsSet()) return
+	if (!config.requireApiKeyIsSet()) return
+	if (!config.requireApiUrlIsSet()) return
 	if (!config.requireIdentityIsSet()) return
 
 	waterfall(
